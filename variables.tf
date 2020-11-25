@@ -61,6 +61,14 @@ variable "oidc_provider_enabled" {
   description = "Create an IAM OIDC identity provider for the cluster, then you can create IAM roles to associate with a service account in the cluster, instead of using kiam or kube2iam. For more information, see https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html"
 }
 
+variable "oidc_thumbprint_list" {
+  type=list
+  description = "oidc thubmprint list"
+  default = [
+    "9e99a48a9960b14926bb7f3b02e22da2b0ab7280",
+  ]
+}
+
 variable "endpoint_private_access" {
   type        = bool
   default     = false

@@ -103,7 +103,10 @@ data "tls_certificate" "cluster" {
   url = aws_eks_cluster.default.identity.0.oidc.0.issuer
 }
 resource "aws_iam_openid_connect_provider" "default" {
+  count = (local.enabled && var.oidc_provider_enabled) ? 1 : 0
+  url   = join("", aws_eks_cluster.default.*.identity.0.oidc.0.issuer)
+
   client_id_list = ["sts.amazonaws.com"]
   thumbprint_list = concat([data.tls_certificate.cluster.certificates.0.sha1_fingerprint], var.oidc_thumbprint_list)
-  url = aws_eks_cluster.default.identity.0.oidc.0.issuer
+  #url = aws_eks_cluster.default.identity.0.oidc.0.issuer
 }
