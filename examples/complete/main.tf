@@ -1,5 +1,6 @@
 provider "aws" {
   region = var.region
+  profile ="fedgovsim_dev_4354"
 }
 
 module "label" {
@@ -35,7 +36,7 @@ locals {
 module "vpc" {
   source = "git::https://github.com/cloudposse/terraform-aws-vpc.git?ref=tags/0.17.0"
 
-  cidr_block = "172.16.0.0/16"
+  cidr_block = "172.19.0.0/16"
   tags       = local.tags
 
   context = module.this.context

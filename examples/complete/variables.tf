@@ -53,7 +53,18 @@ variable "map_additional_iam_users" {
     groups   = list(string)
   }))
 
-  default = []
+  default = [
+    {
+      userarn  = "arn:aws:iam::730895824354:user/dev"
+      username = "dev"
+      groups   = ["system:masters"]
+    },
+    {
+      userarn  = "arn:aws:iam::730895824354:user/rong"
+      username = "rong"
+      groups   = ["system:masters"]
+    },
+  ]
 }
 
 variable "oidc_provider_enabled" {
