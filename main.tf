@@ -100,6 +100,7 @@ resource "aws_eks_cluster" "default" {
 
 #https://marcincuber.medium.com/amazon-eks-with-oidc-provider-iam-roles-for-kubernetes-services-accounts-59015d15cb0c
 data "tls_certificate" "cluster" {
+  count = (local.enabled && var.oidc_provider_enabled) ? 1 : 0
   url = aws_eks_cluster.default.identity.0.oidc.0.issuer
 }
 resource "aws_iam_openid_connect_provider" "default" {
